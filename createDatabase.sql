@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS `Password`;
-DROP TABLE IF EXISTS `TryPassword`;
 DROP TABLE IF EXISTS `Locker`;
 
 CREATE TABLE `Locker` (

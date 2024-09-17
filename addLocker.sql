@@ -1,3 +1,3 @@
 INSERT INTO `Locker`(`password`, `name`, `status`)
-VALUES ('1','locker1', 0), ('2', 'locker2', 0);
+VALUES ('1234','locker1', 0), ('5678', 'locker2', 0);
 
