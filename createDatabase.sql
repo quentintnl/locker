@@ -8,16 +8,11 @@ CREATE TABLE `Password` (
     `created_at` timestamp
 );
 
-CREATE TABLE `TryPassword` (
-    `id` integer PRIMARY KEY AUTO_INCREMENT,
-    `pin` integer,
-    `created_at` timestamp
-);
-
 CREATE TABLE `Locker` (
     `id` integer PRIMARY KEY AUTO_INCREMENT,
     `password_id` integer,
     `name` varchar(255),
+    `status` bool,
     `created_at` timestamp
 );
 
