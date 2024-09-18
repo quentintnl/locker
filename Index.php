@@ -6,15 +6,13 @@ include ("ConnectBDD.php");
      try {
          $conn = DataBase::ConnectPDO();
 
-         if (isset($_GET['password'])) {
-            $passwordLocker = htmlentities($_GET['password']);
-            $result = $conn->prepare('SELECT password, status, name FROM `locker` WHERE `password`= :pass');
-
+         if (isset($_POST['password'])) {
+            $passwordLocker = htmlentities($_POST['password']);
+            $result = $conn->prepare('SELECT password, closeOrOpen, name FROM `locker` WHERE `password`= :pass');
             $result->bindParam('pass', $passwordLocker);
-
             $result->execute();
             $result = $result->fetchAll();
-            if(isset($result)) {
+            if($result==[]) {
                 die( "Pas le bon code frerot");
             }
             echo json_encode($result);
