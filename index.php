@@ -8,16 +8,20 @@ include ("ConnectBDD.php");
 
          if (isset($_POST['password'])) {
             $passwordLocker = htmlentities($_POST['password']);
-            $result = $conn->prepare('SELECT password, closeOrOpen, name FROM `locker` WHERE `password`= :pass');
-            $result->bindParam('pass', $passwordLocker);
+            $result = $conn->prepare('SELECT password FROM `locker`');
             $result->execute();
+
             $result = $result->fetchAll();
-            if($result==[]) {
-                header('Location: ./error.html');
-                exit();
+
+            foreach ($result as $row) {
+                if (password_verify($passwordLocker, $row["password"])) {
+                    header('Location: ./success.html');
+                    exit();
+                }
             }
-            header('Location: ./success.html');
+            header('Location: ./error.html');
             exit();
+
             // echo json_encode($result)
 
             // ULR serv python
