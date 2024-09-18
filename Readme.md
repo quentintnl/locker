@@ -82,8 +82,7 @@ Locker : name varchar
 Locker : created_at timestamp
 ```
 
-Notre base de données ne contient qu'une seule table 'Locker' qui est la base même de notre API. Celle-ci vient reprendre toutes les informations nécessaires pour récupérer et renvoyer les informations au front.
-
+Notre base de données ne contient qu'une seule table 'Locker' qui est la base même de notre API. Celle-ci vient reprendre toutes les informations nécessaires pour récupérer et renvoyer les informations au front.<br>
 Pour lancer les fichiers liés à la base de données il faut exécuter dans le terminal de commande :
 php nomDuFichier
 
@@ -95,7 +94,16 @@ La fonction htmlentities vient sécuriser la requête en empêchant les failles 
 Le query et le fetch_assoc viennent comparer les données contenues en base de données afin de pouvoir ouvrir le locker ou afficher un message d'erreur indiquant que le mot de passe n'est pas correct.<br>
 Le tout est situé dans un try catch, instruction définissant un message si une des instructions contenues à l'intérieur provoque une exception à la sortie. Le try catch sert à attraper les erreurs et à les afficher en cas de problème.<br>
 
-## 3.2 Générateur de mot de passe
+## 3.2 Statut (Ouvert ou Fermé)
+
+On vient lier notre back-end au code en python afin de vérifier que l'id récupéré du python existe bien en base de données. <br>
+Une fois l'id vérifié, si celui-ci existe en base de données alors le statut est modifié (le booléen change) pour passer du statut fermé à ouvert<br>
+A la fin, on vient vérifier que le statut est repassé à fermer et auquel cas le locker se ferme et on vient exécuter le morceau de code de génération de mot de passe.<br>
+
+## 3.3 Générateur de mot de passe
+
+Une fois que le locker est refermé, on vient lancer l'exécution d'un code de génération de mot de passe.<br>
+Le code fait en sorte de venir créer un code à 4 chiffres situé entre 1000 et 9999. Une fois le code trouvé il est passé en base de données afin de vérifier que ce numéro n'existe pas déjà là-bas. Si le mot de passe se trouve déjà en base de données alors le code est exécuté de nouveau sinon, le mot de passe est hashé puis envoyé en base de données.<br>
 
 # 4.Script de contrôleur de moteur en Python, sur Rasberry PI + Script d'exécution en php.
 
