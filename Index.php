@@ -13,7 +13,8 @@ include ("ConnectBDD.php");
             $result->execute();
             $result = $result->fetchAll();
             if($result==[]) {
-                die( "Pas le bon code frerot");
+                header('Location: ./error.html');
+                exit();
             }
             echo json_encode($result);
 
