@@ -16,7 +16,9 @@ include ("ConnectBDD.php");
                 header('Location: ./error.html');
                 exit();
             }
-            echo json_encode($result);
+            header('Location: ./success.html');
+            exit();
+            // echo json_encode($result)
 
             // ULR serv python
          }
