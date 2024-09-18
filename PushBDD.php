@@ -3,7 +3,7 @@ include ("ConnectBDD.php");
 
 echo "Connected successfully\n";
 
-$conn = ConnectBDD();
+$conn = DataBase::ConnectPDO();
 
 $sqlFile = 'createDatabase.sql';
 

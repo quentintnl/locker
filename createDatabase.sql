@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS `Locker`;
 
 CREATE TABLE `Locker` (
     `id` integer PRIMARY KEY AUTO_INCREMENT,
-    `password` integer,
+    `password` varchar(255),
     `name` varchar(255),
-    `status` bool,
+    `closeOrOpen` bool,
     `created_at` timestamp
 );
