@@ -9,14 +9,15 @@
     </head>
     <body>
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">Locker Project</h1>
-        <form method="post" action="index.php">
+        <form method="post" action="./index.php">
             <input
-                type="text"
+                type="number"
                 id="password-input"
                 name="password"
                 placeholder="Mot de passe"
                 class="py-3 px-4 block w-1/6 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                 placeholder="Mot de passe"
+                oninput="checkDigit()"
             >
 
             <div class="flex flex-row mt-4 w-3/12 items-center gap-2">
@@ -95,6 +96,10 @@
                 </svg>
             </button>
         </form>
+
+        <div class="error-popup" id="error-popup">
+            <label>❌ Le code doit être compris entre 1000 et 9999 et doit contenir 4 chiffres !</label>
+        </div>
     </body>
     <script src="script.js"></script>
 </html>

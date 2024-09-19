@@ -26,3 +26,22 @@ div, form {
 
     gap: 2rem;
 }
+
+.error-popup{
+    display: none;
+    background-color: #171717;
+    border: 0;
+    border-radius: 10px;
+    text-align: center;
+    margin: auto;
+    padding: 0.75rem 1rem;
+    width: 40%;
+}
+
+#password-input::-webkit-outer-spin-button,
+#password-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+#password-input[type=number] {
+  -moz-appearance: textfield;
+}
