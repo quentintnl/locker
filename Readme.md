@@ -1,21 +1,12 @@
 # 1. Langages utilisés
 
-<div><ul>
-python
-</ul>
-<ul>
-Json
-</ul><ul>
-PHP
-</ul><ul>
-MySQL
-</ul>
-<ul>
-CSS
-</ul>
-<ul>
-Javascript
-</ul>
+<div>
+	<ul>Python</ul>
+	<ul>Json</ul>
+	<ul>PHP</ul>
+	<ul>MySQL</ul>
+	<ul>CSS</ul>
+	<ul>Javascript</ul>
 </div>
 
 # 2.Front
