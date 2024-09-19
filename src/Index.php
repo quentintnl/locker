@@ -1,7 +1,7 @@
 <?php
 include ("ConnectBDD.php");
 
-function getPin()
+function getLocker() : void
 {
     try {
         $conn = DataBase::ConnectPDO();
@@ -16,6 +16,7 @@ function getPin()
             foreach ($result as $row) {
                 if (password_verify($passwordLocker, $row["password"])) {
                     header('Location: ./success.html');
+                    updateCloseOrOpen($row); // TODO
                     exit();
                 }
             }
@@ -99,4 +100,4 @@ function updateCloseOrOpen()
     }
 }
 
-getPin();
+getLocker();

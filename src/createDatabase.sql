@@ -1,9 +1,10 @@
-DROP TABLE IF EXISTS `Ip`;
+DROP TABLE IF EXISTS `Raspberry`;
 DROP TABLE IF EXISTS `Locker`;
+DROP TABLE IF EXISTS `Ip`;
 
-CREATE TABLE Ip (
+CREATE TABLE Raspberry (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL
+    ip VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Locker (
@@ -11,8 +12,8 @@ CREATE TABLE Locker (
     name VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     pin INT NOT NULL,
-    closeOrOpen BOOLEAN NOT NULL,
+    close_or_open BOOLEAN NOT NULL,
     ip_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (ip_id) REFERENCES IP(id)
+    FOREIGN KEY (ip_id) REFERENCES Raspberry(id)
 );
