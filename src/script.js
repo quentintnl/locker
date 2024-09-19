@@ -4,6 +4,7 @@ const passwordInput = document.getElementById("password-input");
 const paveNumerique = document.querySelectorAll(".pave-numerique");
 const submitButton = document.getElementById("btn-envoyer");
 const data = [];
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 paveNumerique.forEach(function (button) {
   button.addEventListener("click", function () {
@@ -25,11 +26,10 @@ paveNumerique.forEach(function (button) {
 });
 
 function hidePassword() {
-  var input = document.getElementById("passwordInput");
-  if (input.type === "number") {
-    input.type = "password";
+  if (passwordInput.type === "number") {
+    passwordInput.type = "password";
   } else {
-    input.type = "number";
+    passwordInput.type = "number";
   }
 }
 
@@ -52,22 +52,3 @@ function checkDigit() {
     error();
   }
 }
-
-closeLocker.addEventListener("click", function () {
-  const request = new XMLHttpRequest();
-  request.open("POST", "locker/src/api.php?id=" + id.value + "&closeOrOpen=close", true);
-  request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-
-  const body = JSON.stringify({
-    id: id.value,
-    closeOrOpen: "close",
-  });
-  request.onload = () => {
-    if (request.readyState == 4 && request.status == 201) {
-      console.log(JSON.parse(request.responseText));
-    } else {
-      console.log(`Error: ${request.status}`);
-    }
-  };
-  request.send(body);
-});
