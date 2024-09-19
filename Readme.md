@@ -66,11 +66,17 @@ L'idée du locker amène à la création d'une base de données. Nous en sommes 
 
 ```mermaid
 classDiagram
-Locker : id int
-Locker : password int
-Locker : status bool
-Locker : name varchar
-Locker : created_at timestamp
+    Locker <|-- IP
+    Locker : id int
+    Locker : pin int
+    Locker : password varchar
+    Locker : name varchar
+    Locker : created_at timestamp
+    Locker : close_or_open bool
+
+    IP : id int
+    IP : ip varchar
+
 ```
 
 Notre base de données ne contient qu'une seule table 'Locker' qui est la base même de notre API. Celle-ci vient reprendre toutes les informations nécessaires pour récupérer et renvoyer les informations au front.<br>
