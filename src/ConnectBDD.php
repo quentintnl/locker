@@ -5,7 +5,7 @@ class DataBase{
     private static $_instance;
 
     private function __construct(){
-        $dbhDatas = parse_ini_file('config.ini');
+        $dbhDatas = parse_ini_file('../config.ini');
 
         try{
             $this->dbh = new PDO(

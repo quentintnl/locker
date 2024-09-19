@@ -37,7 +37,7 @@ function hidePassword() {
 }
 
 const request = new XMLHttpRequest();
-request.open("POST", "locker/index.php?password=" + password.value, true);
+request.open("POST", "locker/src/index.php?password=" + password.value, true);
 request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
 const body = JSON.stringify({

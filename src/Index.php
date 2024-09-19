@@ -1,26 +1,31 @@
 <?php
 include ("ConnectBDD.php");
 
- function getPin()
- {
-     try {
-         $conn = DataBase::ConnectPDO();
+function getPin()
+{
+    try {
+        $conn = DataBase::ConnectPDO();
 
-         if (isset($_GET['password'])) {
-            $passwordLocker = htmlentities($_GET['password']);
-            $result = $conn->prepare('SELECT password, status, name FROM `locker` WHERE `password`= :pass');
-
-            $result->bindParam('pass', $passwordLocker);
-
+        if (isset($_POST['password'])) {
+            $passwordLocker = htmlentities($_POST['password']);
+            $result = $conn->prepare('SELECT password FROM `locker`'); // TODO PUT BACK OTHER COLUMNS
             $result->execute();
+
             $result = $result->fetchAll();
-            if(isset($result)) {
-                die( "Pas le bon code frerot");
+
+            foreach ($result as $row) {
+                if (password_verify($passwordLocker, $row["password"])) {
+                    header('Location: ./success.html');
+                    exit();
+                }
             }
-            echo json_encode($result);
+            header('Location: ./error.html');
+            exit();
+
+            // echo json_encode($result)
 
             // ULR serv python
-         }
+        }
 
     } catch (PDOException $e) {
         echo $e->getMessage();
