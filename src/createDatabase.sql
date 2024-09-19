@@ -1,9 +1,18 @@
+DROP TABLE IF EXISTS `Ip`;
 DROP TABLE IF EXISTS `Locker`;
 
-CREATE TABLE `Locker` (
-    `id` integer PRIMARY KEY AUTO_INCREMENT,
-    `password` varchar(255),
-    `name` varchar(255),
-    `closeOrOpen` bool,
-    `created_at` timestamp
+CREATE TABLE Ip (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Locker (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    pin INT NOT NULL,
+    closeOrOpen BOOLEAN NOT NULL,
+    ip_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ip_id) REFERENCES IP(id)
 );
