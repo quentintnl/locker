@@ -8,15 +8,28 @@ function getLocker() : void
 
         if (isset($_POST['password'])) {
             $passwordLocker = htmlentities($_POST['password']);
-            $result = $conn->prepare('SELECT password FROM `locker`'); // TODO PUT BACK OTHER COLUMNS
+            $result = $conn->prepare('SELECT name, password, close_or_open, pin, ip FROM Locker INNER JOIN Raspberry ON Locker.ip_id = Raspberry.id');
             $result->execute();
 
             $result = $result->fetchAll();
 
+
             foreach ($result as $row) {
                 if (password_verify($passwordLocker, $row["password"])) {
                     header('Location: ./success.html');
-                    updateCloseOrOpen($row); // TODO
+
+                    $pin = $row['pin'];
+                    $ip = $row['ip'];
+                    $closeOrOpen = $row['close_or_open'];
+
+                    $url = "$ip/locker/?command=$closeOrOpen&port=$pin";
+                    var_dump($url);
+                    $curl = curl_init($url);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($curl);
+                    curl_close($curl);
+                    print_r($response);
+
                     exit();
                 }
             }
@@ -25,7 +38,7 @@ function getLocker() : void
 
             // echo json_encode($result)
 
-            // ULR serv python
+
         }
 
     } catch (PDOException $e) {
@@ -63,7 +76,7 @@ function passwordUpdate()
     }
 }
 
-function updateCloseOrOpen()
+function updateCloseOrOpen($pin, $ip)
 {
     try {
         $conn = DataBase::ConnectPDO();
