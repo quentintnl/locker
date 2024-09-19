@@ -1,14 +1,14 @@
 <?php
-include ("ConnectBDD.php");
+include("ConnectBDD.php");
 
-function getLocker() : void
+function getLocker(): void
 {
     try {
         $conn = DataBase::ConnectPDO();
 
         if (isset($_POST['password'])) {
             $passwordLocker = htmlentities($_POST['password']);
-            $result = $conn->prepare('SELECT name, password, close_or_open, pin, ip FROM Locker INNER JOIN Raspberry ON Locker.ip_id = Raspberry.id');
+            $result = $conn->prepare('SELECT Locker.id, name, password, close_or_open, pin, ip FROM Locker INNER JOIN Raspberry ON Locker.ip_id = Raspberry.id');
             $result->execute();
 
             $result = $result->fetchAll();
@@ -18,17 +18,22 @@ function getLocker() : void
                 if (password_verify($passwordLocker, $row["password"])) {
                     header('Location: ./success.html');
 
+                    $idLocker = $row['id'];
                     $pin = $row['pin'];
                     $ip = $row['ip'];
                     $closeOrOpen = $row['close_or_open'];
 
-                    $url = "$ip/locker/?command=$closeOrOpen&port=$pin";
-                    var_dump($url);
-                    $curl = curl_init($url);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    $response = curl_exec($curl);
-                    curl_close($curl);
-                    print_r($response);
+                    $url = "http://$ip/locker/?command=$closeOrOpen&port=$pin";
+                    $response = json_decode(file_get_contents($url));
+                    print_r($response[0]);
+
+                    var_dump($response);
+
+                    if ($response[0] == "success") {
+                        echo "toto";
+
+                        updateCloseOrOpen($idLocker, $closeOrOpen);
+                    }
 
                     exit();
                 }
@@ -49,7 +54,7 @@ function getLocker() : void
 function passwordUpdate()
 {
     try {
-        $newPassword = rand(1, 2);
+        $newPassword = '2345';
         $conn = DataBase::ConnectPDO();
 
         $results = $conn->prepare("SELECT password FROM `locker`");
@@ -76,33 +81,24 @@ function passwordUpdate()
     }
 }
 
-function updateCloseOrOpen($pin, $ip)
+function updateCloseOrOpen($idLocker, $closeOrOpen)
 {
+    $closeOrOpen = $closeOrOpen == 1 ? 2 : 1;
     try {
         $conn = DataBase::ConnectPDO();
 
-        if (isset($_GET['closeOrOpen']) && isset($_GET['id'])) {
-            $id = htmlentities($_GET['id']);
-            $closeOrOpen = htmlentities($_GET['closeOrOpen']);
-            $idExiste = "SELECT id FROM locker WHERE id = :id";
-            $stmtId = $conn->prepare($idExiste);
-            $stmtId->execute(['id' => $id]);
+        if (isset($idLocker) && isset($closeOrOpen)) {
 
-            if ($stmtId->rowCount() === 0) {
-                echo "Pas d'id";
-            } else {
+            $sql = "UPDATE locker SET close_or_open = :status WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(['status' => $closeOrOpen, 'id' => $idLocker]);
 
-                $sql = "UPDATE locker SET closeOrOpen = :status WHERE id = :id";
+            if ($closeOrOpen == 1) {
+                $passwordUpdate = passwordUpdate();
+                var_dump($passwordUpdate); // TODO
+                $sql = "UPDATE locker SET password = :passwordUpdate WHERE id = :id";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute(['status' => $closeOrOpen,'id' => $id]);
-
-                if ($closeOrOpen == 0) {
-                    $passwordUpdate = passwordUpdate();
-                    var_dump($passwordUpdate);
-                    $sql = "UPDATE locker SET password = :passwordUpdate WHERE id = :id";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->execute(['passwordUpdate' => $passwordUpdate, 'id' => $id]);
-                }
+                $stmt->execute(['passwordUpdate' => $passwordUpdate, 'id' => $idLocker]);
             }
         } else {
             echo "Missing settings.";
