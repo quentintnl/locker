@@ -55,7 +55,7 @@ function checkDigit() {
 
 closeLocker.addEventListener("click", function () {
   const request = new XMLHttpRequest();
-  request.open("POST", "locker/src/index.php?id=" + id.value + "&closeOrOpen=close", true);
+  request.open("POST", "locker/src/api.php?id=" + id.value + "&closeOrOpen=close", true);
   request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
   const body = JSON.stringify({

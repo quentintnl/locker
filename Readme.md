@@ -183,7 +183,7 @@ Maintenant on vérifie que les ports GPIO correspondent bien à un loquet exista
 
 <br/>
 
-Afin de communiquer avec l'API, on a crée un fichier `index.php`. Ce fichier permet d'exécuter le script de controle du moteur, sans passer par le terminal.
+Afin de communiquer avec l'API, on a crée un fichier `api.php`. Ce fichier permet d'exécuter le script de controle du moteur, sans passer par le terminal.
 
 Dans un premier temps, on initialise les variables.
 

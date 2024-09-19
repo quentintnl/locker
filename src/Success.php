@@ -11,12 +11,14 @@
 
         <label class="text-sm font-medium ">Vous avez bien récupéré votre colis !</label>
 
-        <form method="post" action="./index.php">
-            <input type="hidden" id="id" value="1" />
-            <button type="button" id="btn-close-locker" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-              Fermer le locker
-            </button>
+        <form method="post" action="./api.php">
+            <input type="submit" name="close" value="Fermer le locker" id="btn-close-locker"
+                   class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
         </form>
         <script src="script.js"></script>
     </body>
 </html>
+
+<?php
+error_reporting(E_ERROR|E_PARSE);
+
