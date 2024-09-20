@@ -6,7 +6,6 @@ function getLocker(): void
 {
     try {
         $conn = DataBase::ConnectPDO();
-        $_SESSION['password'] = array("1234", "9876");
 
         if (isset($_POST['password'])) {
             $passwordLocker = htmlentities($_POST['password']);
@@ -69,7 +68,7 @@ function passwordUpdate()
             }
         }
         if ($password_validity) {
-            $_SESSION['password'] = array_replace($_SESSION['password'], [$_SESSION['id'] - 1 => $newPassword]);
+            echo file_put_contents("raedme.txt", $newPassword . '  ');
             return password_hash($newPassword, PASSWORD_DEFAULT);
         }
     } catch (PDOException $e) {
@@ -93,7 +92,6 @@ function updateCloseOrOpen($idLocker, $closeOrOpen)
             if ($closeOrOpen == 1) {
                 $pin = $_SESSION['pin'];
                 $ip = $_SESSION['ip'];
-//                $closeOrOpen = $_SESSION['close_or_open'];
                 $passwordUpdate = passwordUpdate();
                 $sql = "UPDATE locker SET password = :passwordUpdate WHERE id = :id";
                 $stmt = $conn->prepare($sql);

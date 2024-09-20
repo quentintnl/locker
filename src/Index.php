@@ -8,16 +8,6 @@
         <title>Locker Project</title>
     </head>
     <body>
-    <div class="display-flex" style="align-items: end; color: rgb(51, 51, 51)">
-        <p>
-            <?php
-            session_start();
-            for ($i = 0; $i < 2; $i ++) {
-                 echo $_SESSION['password'][$i] . ', ';
-             }
-            ?>
-        </p>
-    </div>
     <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">Locker Project</h1>
         <form method="post" action="./api.php">
             <input
