@@ -15,16 +15,16 @@
                 type="number"
                 id="password-input"
                 name="password"
-                class="py-3 px-4 block w-1/6 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                class="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                 placeholder="Mot de passe"
                 oninput="checkDigit()"
-            >
+            />
 
             <div class="error-popup" id="error-popup">
                 <label>❌ Le code doit être compris entre 1000 et 9999 et doit contenir 4 chiffres !</label>
             </div>
 
-            <div class="flex flex-row mt-4 w-3/12 items-center gap-2">
+            <div class="flex flex-row mt-4 items-center gap-2 hide-password-container">
                 <input
                     tabindex="2"
                     data-hs-toggle-password='{ "target": "#hs-toggle-password-with-checkbox" }'
@@ -36,7 +36,7 @@
                 <label for="hide_password" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Cacher le mot de passe</label>
             </div>
 
-            <div class="flex flex-row rounded-md shadow-sm w-1/6 flex-wrap justify-center align-middle">
+            <div class="flex flex-row rounded-md shadow-sm flex-wrap justify-center align-middle pave-numerique-container">
                 <input
                     tabindex="3"
                     type="button"

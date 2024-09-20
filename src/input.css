@@ -46,3 +46,29 @@ div, form {
 #password-input[type=number] {
   -moz-appearance: textfield;
 }
+
+.pave-numerique-container {
+  width: 15vw;
+}
+
+@media screen and (max-width: 1440px) {
+  .pave-numerique-container {
+    width: 25vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pave-numerique-container {
+    width: 30vw;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .pave-numerique-container {
+    width: 60vw;
+  }
+}
+
+.hide-password-container {
+  width: 100vw;
+}
