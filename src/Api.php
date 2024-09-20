@@ -21,6 +21,7 @@ function getLocker(): void
                     $_SESSION['close_or_open'] = $row["close_or_open"];
                     $_SESSION['pin'] = $row["pin"];
                     $_SESSION['ip'] = $row["ip"];
+                    $_SESSION['name'] = $row["name"];
                     header('Location: ./Success.php');
 
                     $idLocker = $row['id'];

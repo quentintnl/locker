@@ -1,3 +1,8 @@
+<?php
+session_start();
+error_reporting(E_ERROR|E_PARSE);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +14,7 @@
     <body>
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">Locker Project</h1>
 
-        <label class="text-sm font-medium ">Vous avez bien récupéré votre colis !</label>
+        <p class="text-sm font-medium ">Le locker <?php echo $_SESSION['name']; ?> s'est ouvert, vous pouvez récupéré votre colis !</p>
 
         <form method="post" action="./api.php">
             <input
@@ -25,6 +30,4 @@
     </body>
 </html>
 
-<?php
-error_reporting(E_ERROR|E_PARSE);
 

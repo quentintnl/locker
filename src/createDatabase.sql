@@ -23,5 +23,5 @@ VALUES ('1','192.168.241.154'),
        ('2','192.169.4.50');
 
 INSERT INTO `Locker`(`name`, `password`, `pin`, `close_or_open`, `ip_id`)
-VALUES  ('Locker1','$2y$10$VZgm5eA7DLgQBlzY8b0rm.EI1V7ZGLMQqA/i0WKdrujmaN7Y49tSq','27','1','1'),
-        ('Locker2','$2y$10$8ZpkYfi7blv5zxO5vk9dXOk0Iw8rLWkJHvUogG4bOCopE18.GUfGK','17','1','1');
+VALUES  ('Ben','$2y$10$VZgm5eA7DLgQBlzY8b0rm.EI1V7ZGLMQqA/i0WKdrujmaN7Y49tSq','27','1','1'),
+        ('Bob','$2y$10$8ZpkYfi7blv5zxO5vk9dXOk0Iw8rLWkJHvUogG4bOCopE18.GUfGK','17','1','1');
