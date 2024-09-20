@@ -53,7 +53,7 @@ function getLocker(): void
 function passwordUpdate()
 {
     try {
-        $newPassword = rand(1000, 9999);
+        $newPassword = rand(1000, 1005);
         $conn = DataBase::ConnectPDO();
 
         $results = $conn->prepare("SELECT password FROM `locker`");
@@ -68,7 +68,7 @@ function passwordUpdate()
             }
         }
         if ($password_validity) {
-            echo file_put_contents("raedme.txt", $newPassword . '  ');
+            //echo file_put_contents("raedme.txt", $newPassword . '  ');
             return password_hash($newPassword, PASSWORD_DEFAULT);
         }
     } catch (PDOException $e) {

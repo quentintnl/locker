@@ -19,7 +19,7 @@ CREATE TABLE Locker (
 );
 
 INSERT INTO `Raspberry`(`id`, `ip`)
-VALUES ('1','192.168.241.154'),
+VALUES ('1','192.168.47.95'),
        ('2','192.169.4.50');
 
 INSERT INTO `Locker`(`name`, `password`, `pin`, `close_or_open`, `ip_id`)
