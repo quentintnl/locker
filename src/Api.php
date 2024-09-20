@@ -6,6 +6,7 @@ function getLocker(): void
 {
     try {
         $conn = DataBase::ConnectPDO();
+        $_SESSION['password'] = array("1234", "9876");
 
         if (isset($_POST['password'])) {
             $passwordLocker = htmlentities($_POST['password']);
@@ -35,7 +36,6 @@ function getLocker(): void
                     }
 
                     $close = $_POST['close'];
-                    var_dump($close);
 
                     exit();
                 }
@@ -53,7 +53,7 @@ function getLocker(): void
 function passwordUpdate()
 {
     try {
-        $newPassword = rand(1000, 1005);
+        $newPassword = rand(1000, 9999);
         $conn = DataBase::ConnectPDO();
 
         $results = $conn->prepare("SELECT password FROM `locker`");
@@ -61,7 +61,6 @@ function passwordUpdate()
 
         $results = $results->fetchAll();
         $password_validity = true;
-        var_dump($results);
         foreach ($results as $result) {
             if (password_verify($newPassword, $result["password"])) {
                 $password_validity = false;
@@ -69,6 +68,7 @@ function passwordUpdate()
             }
         }
         if ($password_validity) {
+            $_SESSION['password'] = array_replace($_SESSION['password'], [$_SESSION['id'] - 1 => $newPassword]);
             return password_hash($newPassword, PASSWORD_DEFAULT);
         }
     } catch (PDOException $e) {
@@ -92,9 +92,8 @@ function updateCloseOrOpen($idLocker, $closeOrOpen)
             if ($closeOrOpen == 1) {
                 $pin = $_SESSION['pin'];
                 $ip = $_SESSION['ip'];
-                $closeOrOpen = $_SESSION['close_or_open'];
+//                $closeOrOpen = $_SESSION['close_or_open'];
                 $passwordUpdate = passwordUpdate();
-                var_dump($passwordUpdate); // TODO
                 $sql = "UPDATE locker SET password = :passwordUpdate WHERE id = :id";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute(['passwordUpdate' => $passwordUpdate, 'id' => $idLocker]);
